@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  # Planned services for RecoverX will be configured in subsequent phases:
+  # - backend (API & AI Orchestrator)
+  # - frontend (Merchant Dashboard)
+  # - postgres (Persistent Data Store)
+  # - redis (Message Queue / State Cache)
