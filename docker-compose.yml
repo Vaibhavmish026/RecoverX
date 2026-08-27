@@ -1,8 +1,29 @@
 version: '3.8'
 
 services:
+  postgres:
+    image: postgres:16
+    container_name: recoverx_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: recoverx
+      POSTGRES_USER: recoverx
+      POSTGRES_PASSWORD: recoverx_dev_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - recoverx_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U recoverx -d recoverx"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
   # Planned services for RecoverX will be configured in subsequent phases:
   # - backend (API & AI Orchestrator)
   # - frontend (Merchant Dashboard)
-  # - postgres (Persistent Data Store)
   # - redis (Message Queue / State Cache)
+
+volumes:
+  recoverx_postgres_data:
